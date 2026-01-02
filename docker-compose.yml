@@ -2,14 +2,14 @@
 services:
   postgres:
     image: postgres:16
-    container_name: findpet_db
     restart: always
-    environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+    container_name: findpet_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
