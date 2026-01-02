@@ -9,6 +9,6 @@ export class UsuariosController {
 
   @Get()
   obtenerUsuarios() {
-    return this.usuariosService.obtenerMensaje();
+    return this.usuariosService.obtenerUsuarios();
   }
 }

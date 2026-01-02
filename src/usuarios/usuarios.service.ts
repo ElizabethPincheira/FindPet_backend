@@ -7,7 +7,7 @@ export class UsuariosService {
     private readonly usuariosRepository: UsuariosRepository,
   ) {}
 
-  obtenerMensaje() {
-    return this.usuariosRepository.obtenerMensaje();
+   obtenerUsuarios() {
+    return this.usuariosRepository.obtenerTodos();
   }
 }
