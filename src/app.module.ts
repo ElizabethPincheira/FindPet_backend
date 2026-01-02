@@ -15,6 +15,7 @@ import { UsuariosModule } from './usuarios/usuarios.module';
       synchronize: false,     // MUY importante en producción
     }),
     UsuariosModule,
+
   ],
 })
 export class AppModule {}
