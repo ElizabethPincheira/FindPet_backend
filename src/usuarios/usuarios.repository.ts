@@ -14,8 +14,8 @@ export class UsuariosRepository {
     return this.repo.find();
   }
 
-  findById(id: number) {
-    return this.repo.findOne({ where: { id } });
+  findById(usuario_id: number) {
+    return this.repo.findOne({ where: { usuario_id } });
   }
 
   create(user: Partial<Usuario>) {
