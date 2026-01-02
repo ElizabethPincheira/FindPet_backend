@@ -1,21 +1,14 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
+import { UsuariosService } from './usuarios.service';
 
-@Controller('usuarios') //enpoint -> /usuarios
+@Controller('usuarios')
 export class UsuariosController {
+  constructor(
+    private readonly usuariosService: UsuariosService,
+  ) {}
 
-    private usuarios = ['Juan Pablo','Elizabeth'];
-
-    @Get()
-    getAllUsers() {
-        return this.usuarios;
-    }
-    @Get(':id')
-    getUserById(@Param('id') id: string) {
-        console.log({id})
-        return this.usuarios[parseInt(id)];
-    }
-
-
+  @Get()
+  obtenerUsuarios() {
+    return this.usuariosService.obtenerMensaje();
+  }
 }
-
-
