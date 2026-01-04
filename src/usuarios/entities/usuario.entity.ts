@@ -1,40 +1,26 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { Exclude } from 'class-transformer';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Mascota } from 'src/mascotas/entities/mascota.entity';
 
 @Entity('usuarios')
-export class Usuario {
-
+export class Usuarios {
   @PrimaryGeneratedColumn()
   usuario_id: number;
 
-  @Column({ type: 'varchar', length: 40, nullable: false })
+  @Column()
   nombre: string;
 
-  @Column({ type: 'varchar', length: 40, nullable: false })
+  @Column()
   apellido: string;
 
-  @Column({
-    type: 'varchar',
-    length: 100,
-    nullable: false,
-    unique: true
-  })
+  @Column({ unique: true })
   correo_electronico: string;
 
-  @Exclude()
-  @Column({ type: 'varchar', length: 255, nullable: false })
+  @Column()
   contrasena: string;
 
-  @Column({
-    type: 'varchar',
-    length: 30,
-    nullable: false,
-    default: 'comun'
-  })
+  @Column()
   tipo_usuario: string;
-}
 
+  @OneToMany(() => Mascota, (mascota) => mascota.usuario)
+  mascotas: Mascota[];
+}

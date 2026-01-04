@@ -4,14 +4,14 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { Usuario } from 'src/usuarios/entities/usuario.entity';
+import { Usuarios } from 'src/usuarios/entities/usuario.entity';
 
 
 @Injectable()
 export class SeedService {
   constructor(
-    @InjectRepository(Usuario)
-    private readonly usuarioRepo: Repository<Usuario>,
+    @InjectRepository(Usuarios)
+    private readonly usuarioRepo: Repository<Usuarios>,
   ) {}
 
   async seedUsuarios() {
