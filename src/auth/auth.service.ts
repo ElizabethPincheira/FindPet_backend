@@ -32,8 +32,9 @@ export class AuthService {
       throw new UnauthorizedException('Credenciales incorrectas');
     }
 
+
     const payload = {
-      id: usuario.usuario_id,
+      usuario_id: usuario.usuario_id,
     };
 
     return {

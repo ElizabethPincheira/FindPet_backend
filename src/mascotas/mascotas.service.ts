@@ -16,6 +16,11 @@ export class MascotasService {
   ) {}
 
   async create(dto: CreateMascotaDto, usuarioId: number) {
+
+    if (!usuarioId) {
+      throw new Error('Usuario ID es requerido para crear una mascota');
+    }
+    
     const usuario = await this.usuarioRepo.findOneBy({
       usuario_id: usuarioId,
     });

@@ -11,7 +11,9 @@ export class MascotasController {
   @Post()
   @UseGuards(JwtAuthGuard)
   create(@Body() dto: CreateMascotaDto, @CurrentUser() user: any) {
-    return this.mascotasService.create(dto, user.sub);
+
+    console.log('Usuario actual en MascotasController:', user);
+    return this.mascotasService.create(dto, user.usuario_id);
   }
 
   @Get()
