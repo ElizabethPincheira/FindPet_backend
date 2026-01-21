@@ -21,7 +21,14 @@ export class Mascota {
   @Column({ nullable: true })
   descripcion: string;
 
-  @ManyToOne(() => Usuarios, (usuario) => usuario.mascotas)
+  @Column({ nullable: true })
+  numero_chip: string;
+
+  @Column({ default: true })
+  activo: boolean;
+
+  @ManyToOne(() => Usuarios, usuario => usuario.mascotas)
   @JoinColumn({ name: 'usuario_id' })
   usuario: Usuarios;
 }
+

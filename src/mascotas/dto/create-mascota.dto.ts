@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsOptional } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional, IsNumber } from 'class-validator';
 
 export class CreateMascotaDto {
   @IsString()
@@ -18,6 +18,10 @@ export class CreateMascotaDto {
   color?: string;
 
   @IsString()
+  @IsNotEmpty()
+  descripcion: string;
+
+  @IsString()
   @IsOptional()
-  descripcion?: string;
+  numero_chip?: string;
 }

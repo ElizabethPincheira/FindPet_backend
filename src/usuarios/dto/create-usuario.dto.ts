@@ -11,6 +11,7 @@ export class CreateUsuarioDto {
 
   @IsString()
   @IsNotEmpty()
+  @MinLength(3)
   nombre: string;
 
   @IsString()
@@ -27,7 +28,11 @@ export class CreateUsuarioDto {
   @IsOptional()
   @IsString()
   tipo_usuario?: string;
+
 }
+
+
+
 
 
 

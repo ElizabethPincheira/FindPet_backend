@@ -1,45 +1,42 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Mascota } from './entities/mascota.entity';
 import { CreateMascotaDto } from './dto/create-mascota.dto';
-import { Usuarios } from '../usuarios/entities/usuario.entity';
+import { UsuariosRepository } from 'src/usuarios/usuarios.repository';
+import { MascotaRepository } from './mascotas.repository';
+
 
 @Injectable()
 export class MascotasService {
-  constructor(
-    @InjectRepository(Mascota)
-    private readonly mascotaRepo: Repository<Mascota>,
 
-    @InjectRepository(Usuarios)
-    private readonly usuarioRepo: Repository<Usuarios>,
-  ) {}
+  constructor(
+    private readonly mascotaRepo: MascotaRepository,
+    private readonly usuariosRepo: UsuariosRepository,
+  ) { }
+
+  async findAll() {
+    return this.mascotaRepo.find();
+  }
+
+  async findMisMascotas(usuarioId: number) {
+    return this.mascotaRepo.findByUsuario(usuarioId);
+  }
 
   async create(dto: CreateMascotaDto, usuarioId: number) {
 
     if (!usuarioId) {
-      throw new Error('Usuario ID es requerido para crear una mascota');
+      throw new Error('Usuario ID es requerido');
     }
-    
-    const usuario = await this.usuarioRepo.findOneBy({
-      usuario_id: usuarioId,
-    });
+
+
+    const usuario = await this.usuariosRepo.findById(usuarioId);
+
 
     if (!usuario) {
       throw new Error('Usuario no encontrado');
     }
 
-    const mascota = this.mascotaRepo.create({
-      ...dto,
-      usuario,
-    });
-
-    return this.mascotaRepo.save(mascota);
+    return this.mascotaRepo.createMascota(dto, usuario);
   }
 
-  findAll() {
-    return this.mascotaRepo.find({
-      relations: ['usuario'],
-    });
-  }
+  
+
 }

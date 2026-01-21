@@ -1,46 +1,39 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-
-import { Usuarios } from './entities/usuario.entity';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+import { UsuariosRepository } from './usuarios.repository';
 
 @Injectable()
 export class UsuariosService {
   constructor(
-    @InjectRepository(Usuarios)
-    private readonly usuarioRepo: Repository<Usuarios>,
-  ) { }
+    private readonly usuariosRepository: UsuariosRepository,
+  ) {}
 
   async create(dto: CreateUsuarioDto) {
+    const existe = await this.usuariosRepository.findByEmail(
+      dto.correo_electronico,
+    );
+
+    if (existe) {
+      throw new BadRequestException('El correo ya está registrado');
+    }
+
     const hash = await bcrypt.hash(dto.contrasena, 10);
 
-    const usuario = this.usuarioRepo.create({
+    return this.usuariosRepository.create({
       ...dto,
       contrasena: hash,
       tipo_usuario: dto.tipo_usuario ?? 'comun',
     });
-
-    return this.usuarioRepo.save(usuario);
   }
 
   async findAll() {
-    return this.usuarioRepo.find({
-      relations: ['mascotas'],
-    });
+    return this.usuariosRepository.findAll();
   }
 
   async findOne(id: number) {
-
-    console.log(id);
-    const usuario = await this.usuarioRepo.findOne({
-      where: { usuario_id: id },
-      relations: ['mascotas'],
-    });
-
-    console.log(usuario);
+    const usuario = await this.usuariosRepository.findById(id);
 
     if (!usuario) {
       throw new Error('Usuario no encontrado');
@@ -49,17 +42,14 @@ export class UsuariosService {
     return usuario;
   }
 
-
   async update(id: number, dto: UpdateUsuarioDto) {
     const usuario = await this.findOne(id);
-
     Object.assign(usuario, dto);
-
-    return this.usuarioRepo.save(usuario);
+    return this.usuariosRepository.save(usuario);
   }
 
   async remove(id: number) {
     const usuario = await this.findOne(id);
-    return this.usuarioRepo.remove(usuario);
+    return this.usuariosRepository.remove(usuario);
   }
 }

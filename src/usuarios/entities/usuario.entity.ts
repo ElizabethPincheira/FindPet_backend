@@ -21,6 +21,12 @@ export class Usuarios {
   @Column()
   tipo_usuario: string;
 
+   @Column({ default: true })
+  activo: boolean;
+
   @OneToMany(() => Mascota, (mascota) => mascota.usuario)
   mascotas: Mascota[];
+
+  @Column({ default: 'usuario' })
+  rol: string;
 }
