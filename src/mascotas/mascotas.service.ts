@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateMascotaDto } from './dto/create-mascota.dto';
-import { UsuariosRepository } from 'src/usuarios/usuarios.repository';
+import { UsuariosRepository } from '../usuarios/usuarios.repository';
 import { MascotaRepository } from './mascotas.repository';
 
 
