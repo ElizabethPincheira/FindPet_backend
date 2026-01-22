@@ -12,18 +12,18 @@ export class CreateUsuarioDto {
   @IsString()
   @IsNotEmpty()
   @MinLength(3)
-  nombre: string;
+  nombre!: string;
 
   @IsString()
   @IsNotEmpty()
-  apellido: string;
+  apellido!: string;
 
   @IsEmail()
-  correo_electronico: string;
+  correo_electronico!: string;
 
   @IsString()
   @MinLength(6)
-  contrasena: string;
+  contrasena!: string;
 
   @IsOptional()
   @IsString()

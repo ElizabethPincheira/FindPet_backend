@@ -1,34 +1,34 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { Usuarios } from 'src/usuarios/entities/usuario.entity';
+import { Usuarios } from '../../usuarios/entities/usuario.entity';
 
 @Entity('mascota')
 export class Mascota {
   @PrimaryGeneratedColumn()
-  mascota_id: number;
+  mascota_id!: number;
 
   @Column()
-  nombre: string;
+  nombre!: string;
 
   @Column()
-  tipo_mascota: string;
+  tipo_mascota!: string;
 
   @Column({ nullable: true })
-  raza: string;
+  raza!: string;
 
   @Column({ nullable: true })
-  color: string;
+  color!: string;
 
   @Column({ nullable: true })
-  descripcion: string;
+  descripcion!: string;
 
   @Column({ nullable: true })
-  numero_chip: string;
+  numero_chip!: string;
 
   @Column({ default: true })
-  activo: boolean;
+  activo!: boolean;
 
   @ManyToOne(() => Usuarios, usuario => usuario.mascotas)
   @JoinColumn({ name: 'usuario_id' })
-  usuario: Usuarios;
+  usuario!: Usuarios;
 }
 
