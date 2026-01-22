@@ -9,21 +9,30 @@ import { MascotasModule } from './mascotas/mascotas.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    
+
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DB_HOST,
-      port: Number(process.env.DB_PORT),
-      database: process.env.DB_NAME,
-      username: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
+      url: process.env.DATABASE_URL,
       autoLoadEntities: true,
-      synchronize: true,
-    }),
+      synchronize: true, // solo para el proyecto / desarrollo
+      ssl: process.env.NODE_ENV === 'production'
+        ? { rejectUnauthorized: false }
+        : false,
     
-    UsuariosModule, 
-    
-    SeedModule, AuthModule, MascotasModule
+        /*
+        host: process.env.DB_HOST,
+        port: Number(process.env.DB_PORT),
+        database: process.env.DB_NAME,
+        username: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        autoLoadEntities: true,
+        synchronize: true,
+        */
+      }),
+
+UsuariosModule,
+
+  SeedModule, AuthModule, MascotasModule
   ],
 })
-export class AppModule {}
+export class AppModule { }
