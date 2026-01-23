@@ -3,11 +3,12 @@ import { IsString, IsNotEmpty, IsOptional, IsNumber } from 'class-validator';
 export class CreateMascotaDto {
   @IsString()
   @IsNotEmpty()
-  nombre!: string;
+  nombre: string;
 
   @IsString()
   @IsNotEmpty()
-  tipo_mascota!: string;
+  tipo_mascota: string;
+
   @IsString()
   @IsOptional()
   raza?: string;
@@ -18,7 +19,7 @@ export class CreateMascotaDto {
 
   @IsString()
   @IsNotEmpty()
-  descripcion!: string;
+  descripcion: string;
 
   @IsString()
   @IsOptional()

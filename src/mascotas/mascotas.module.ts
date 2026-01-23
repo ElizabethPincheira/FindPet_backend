@@ -4,8 +4,8 @@ import { MascotasService } from './mascotas.service';
 import { MascotasController } from './mascotas.controller';
 import { Mascota } from './entities/mascota.entity';
 import { MascotaRepository } from './mascotas.repository';
-import { UsuariosModule } from '../usuarios/usuarios.module';
-import { AuthModule } from '../auth/auth.module';
+import { UsuariosModule } from 'src/usuarios/usuarios.module';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   imports: [
