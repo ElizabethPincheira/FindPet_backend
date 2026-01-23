@@ -13,7 +13,19 @@ export class MascotaRepository {
   ) {}
 
   find() {
-    return this.repo.find({ relations: ['usuario'] });
+    return this.repo.find({ 
+      relations: ['usuario'],
+      select: {
+        mascota_id: true,
+        nombre: true,
+        tipo_mascota: true,
+        raza: true,
+        color: true,
+        descripcion: true,
+        numero_chip: true,
+        activo: true,
+      }
+    });
   }
 
   createMascota(dto: CreateMascotaDto, usuario: Usuarios) {
@@ -26,11 +38,21 @@ export class MascotaRepository {
 
 
   findByUsuario(usuarioId: number) {
-  return this.repo.find({
-    where: {
-      usuario: { usuario_id: usuarioId },
-    },
-  });
-}
+    return this.repo.find({
+      where: {
+        usuario: { usuario_id: usuarioId },
+      },
+      select: {
+        mascota_id: true,
+        nombre: true,
+        tipo_mascota: true,
+        raza: true,
+        color: true,
+        descripcion: true,
+        numero_chip: true,
+        activo: true,
+      }
+    });
+  }
 
 }

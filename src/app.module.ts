@@ -5,6 +5,7 @@ import { UsuariosModule } from './usuarios/usuarios.module';
 import { SeedModule } from './seed/seed.module';
 import { AuthModule } from './auth/auth.module';
 import { MascotasModule } from './mascotas/mascotas.module';
+import { PublicacionesModule } from './publicaciones/publicaciones.module';
 
 @Module({
   imports: [
@@ -23,7 +24,7 @@ import { MascotasModule } from './mascotas/mascotas.module';
     
     UsuariosModule, 
     
-    SeedModule, AuthModule, MascotasModule
+    SeedModule, AuthModule, MascotasModule, PublicacionesModule
   ],
 })
 export class AppModule {}
