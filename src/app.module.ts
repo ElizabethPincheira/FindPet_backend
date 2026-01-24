@@ -12,22 +12,46 @@ import { PublicacionesModule } from './publicaciones/publicaciones.module';
     ConfigModule.forRoot(),
 
     TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.DB_HOST,
-      port: Number(process.env.DB_PORT),
-      username: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      autoLoadEntities: true,
-      synchronize: true,
-      ssl: process.env.NODE_ENV === 'production',
-      extra: {
-        ssl:
-          process.env.NODE_ENV === 'production'
-            ? { rejectUnauthorized: false }
-            : false,
-      },
-    }),
+  type: 'postgres',
+  url:
+    process.env.NODE_ENV === 'production'
+      ? process.env.DATABASE_URL
+      : undefined,
+
+  host:
+    process.env.NODE_ENV !== 'production'
+      ? process.env.DB_HOST
+      : undefined,
+
+  port:
+    process.env.NODE_ENV !== 'production'
+      ? Number(process.env.DB_PORT)
+      : undefined,
+
+  username:
+    process.env.NODE_ENV !== 'production'
+      ? process.env.DB_USER
+      : undefined,
+
+  password:
+    process.env.NODE_ENV !== 'production'
+      ? process.env.DB_PASSWORD
+      : undefined,
+
+  database:
+    process.env.NODE_ENV !== 'production'
+      ? process.env.DB_NAME
+      : undefined,
+
+  autoLoadEntities: true,
+  synchronize: true,
+
+  ssl:
+    process.env.NODE_ENV === 'production'
+      ? { rejectUnauthorized: false }
+      : false,
+}),
+
 
 
     UsuariosModule,
