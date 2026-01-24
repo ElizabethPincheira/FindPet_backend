@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Publicacion } from './entities/publicacion.entity';
 import { CreatePublicacionDto } from './dto/create-publicacion.dto';
-import { Mascota } from 'src/mascotas/entities/mascota.entity';
+import { Mascota } from '../mascotas/entities/mascota.entity';
 
 @Injectable()
 export class PublicacionesService {

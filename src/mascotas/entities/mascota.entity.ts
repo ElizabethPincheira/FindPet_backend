@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { Usuarios } from 'src/usuarios/entities/usuario.entity';
+import { Usuarios } from '../../usuarios/entities/usuario.entity';
 
 @Entity('mascota')
 export class Mascota {

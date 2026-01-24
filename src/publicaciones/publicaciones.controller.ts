@@ -9,8 +9,8 @@ import {
 } from '@nestjs/common';
 import { PublicacionesService } from './publicaciones.service';
 import { CreatePublicacionDto } from './dto/create-publicacion.dto';
-import { JwtAuthGuard } from 'src/auth/guards/jwt/jwt.guard';
-import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
+import { JwtAuthGuard } from '../auth/guards/jwt/jwt.guard';
+import { CurrentUser } from '../auth/decorators/current-user.decorator';
 
 @Controller('publicaciones')
 export class PublicacionesController {

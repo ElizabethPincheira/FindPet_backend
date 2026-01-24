@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { Mascota } from 'src/mascotas/entities/mascota.entity';
+import { Mascota } from '../../mascotas/entities/mascota.entity';
 
 @Entity('usuarios')
 export class Usuarios {

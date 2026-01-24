@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { Mascota } from 'src/mascotas/entities/mascota.entity';
-import { Usuarios } from 'src/usuarios/entities/usuario.entity';
+import { Mascota } from '../../mascotas/entities/mascota.entity';
+import { Usuarios } from '../../usuarios/entities/usuario.entity';
 
 @Entity('publicaciones')
 export class Publicacion {

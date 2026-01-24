@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PublicacionesService } from './publicaciones.service';
 import { PublicacionesController } from './publicaciones.controller';
 import { Publicacion } from './entities/publicacion.entity';
-import { Mascota } from 'src/mascotas/entities/mascota.entity';
+import { Mascota } from '../mascotas/entities/mascota.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Publicacion, Mascota])],

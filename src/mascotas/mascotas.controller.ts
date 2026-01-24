@@ -1,8 +1,8 @@
 import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
 import { MascotasService } from './mascotas.service';
 import { CreateMascotaDto } from './dto/create-mascota.dto';
-import { JwtAuthGuard } from 'src/auth/guards/jwt/jwt.guard';
-import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
+import { JwtAuthGuard } from '../auth/guards/jwt/jwt.guard';
+import { CurrentUser } from '../auth/decorators/current-user.decorator';
 
 @Controller('mascotas')
 export class MascotasController {
