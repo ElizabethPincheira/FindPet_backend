@@ -9,21 +9,34 @@ import { PublicacionesModule } from './publicaciones/publicaciones.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
 
-    TypeOrmModule.forRoot({
-  type: 'postgres',
-  url: process.env.DATABASE_URL,
-  autoLoadEntities: true,
-  synchronize: true,
-  ssl: process.env.NODE_ENV === 'production',
-  extra: {
-    ssl:
-      process.env.NODE_ENV === 'production'
-        ? { rejectUnauthorized: false }
-        : false,
-  },
-}),
+    TypeOrmModule.forRoot(
+  process.env.DATABASE_URL
+    ? {
+        // 👉 RENDER (producción)
+        type: 'postgres',
+        url: process.env.DATABASE_URL,
+        autoLoadEntities: true,
+        synchronize: true,
+        ssl: { rejectUnauthorized: false },
+      }
+    : {
+        // 👉 LOCAL (docker / postgres local)
+        type: 'postgres',
+        host: process.env.DB_HOST,
+        port: Number(process.env.DB_PORT),
+        username: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
+        autoLoadEntities: true,
+        synchronize: true,
+      },
+),
+
+
 
 
 
@@ -33,4 +46,10 @@ import { PublicacionesModule } from './publicaciones/publicaciones.module';
     SeedModule, AuthModule, MascotasModule, PublicacionesModule
   ],
 })
+
+
+
+
 export class AppModule { }
+
+
