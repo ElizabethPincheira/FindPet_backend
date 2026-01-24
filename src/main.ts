@@ -1,4 +1,3 @@
-
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
@@ -6,21 +5,20 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // Validaciones globales
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true,           // elimina campos que no existen en el DTO
-      forbidNonWhitelisted: true // error si mandan campos extra
+      whitelist: true,
+      forbidNonWhitelisted: true,
     }),
   );
 
-
+  // Serialización
   app.useGlobalInterceptors(
     new ClassSerializerInterceptor(app.get(Reflector)),
   );
 
-  async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-
+  // CORS (CLAVE para Render + Front)
   app.enableCors({
     origin: [
       'http://localhost:4200',
@@ -34,6 +32,5 @@ async function bootstrap() {
 
   console.log(`🚀 App corriendo en puerto ${port}`);
 }
-bootstrap();
 
-}
+bootstrap();
